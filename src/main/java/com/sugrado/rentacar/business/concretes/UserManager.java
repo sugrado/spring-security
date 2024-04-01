@@ -3,7 +3,6 @@ package com.sugrado.rentacar.business.concretes;
 import com.sugrado.rentacar.business.abstracts.UserService;
 import com.sugrado.rentacar.business.dtos.requests.RegisterRequest;
 import com.sugrado.rentacar.business.messages.AuthMessages;
-import com.sugrado.rentacar.core.services.JwtService;
 import com.sugrado.rentacar.core.utilities.exceptions.types.BusinessException;
 import com.sugrado.rentacar.core.utilities.mapping.ModelMapperService;
 import com.sugrado.rentacar.dataAccess.abstracts.UserRepository;
