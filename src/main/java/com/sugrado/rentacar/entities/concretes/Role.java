@@ -23,7 +23,7 @@ public class Role extends BaseEntity<Integer> implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 
     @Override
