@@ -20,7 +20,6 @@ public class JwtService {
     @Value("${jwt.expiration.time}")
     private long EXPIRATION;
 
-    // Boilerplate => Basmakalıp
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userName);
