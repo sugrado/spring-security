@@ -21,9 +21,9 @@ import java.time.LocalDateTime;
 public class RefreshToken extends BaseEntity<Integer> {
     private String revokedByIp;
     private LocalDateTime revokedDate;
+    private String revokeReason;
     private String token;
     private LocalDateTime expirationDate;
-    private String revokeReason;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

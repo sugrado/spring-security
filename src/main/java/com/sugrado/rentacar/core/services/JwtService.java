@@ -9,15 +9,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 
 @Service
 public class JwtService {
     @Value("${jwt.secret.key}")
-    private String SECRET_KEY;
+    private String secretKey;
     @Value("${jwt.expiration.time}")
-    private long EXPIRATION;
+    private long expiration;
 
     public String generateToken(String userName, Map<String, Object> claims) {
         return createToken(claims, userName);
@@ -55,13 +57,20 @@ public class JwtService {
                 .claims(claims)
                 .subject(userName)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignKey())
                 .compact();
     }
 
     private SecretKey getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public String randomRefreshToken() {
+        byte[] numberByte = new byte[33];
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(numberByte);
+        return Base64.getEncoder().encodeToString(numberByte);
     }
 }
