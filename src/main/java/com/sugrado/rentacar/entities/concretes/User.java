@@ -36,6 +36,9 @@ public class User extends BaseEntity<Integer> implements UserDetails {
     )
     private Set<Role> authorities;
 
+    @OneToMany(mappedBy = "user")
+    private Set<RefreshToken> refreshTokens;
+
     @Override
     public String getUsername() {
         return email;

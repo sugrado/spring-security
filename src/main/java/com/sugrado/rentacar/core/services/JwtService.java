@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -20,8 +19,7 @@ public class JwtService {
     @Value("${jwt.expiration.time}")
     private long EXPIRATION;
 
-    public String generateToken(String userName) {
-        Map<String, Object> claims = new HashMap<>();
+    public String generateToken(String userName, Map<String, Object> claims) {
         return createToken(claims, userName);
     }
 
