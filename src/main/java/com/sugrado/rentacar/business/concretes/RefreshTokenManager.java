@@ -28,7 +28,7 @@ public class RefreshTokenManager implements RefreshTokenService {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUser(user);
         refreshToken.setToken(jwtService.randomRefreshToken());
-        refreshToken.setExpirationDate(LocalDateTime.now().plusSeconds(refreshTokenExpiryDays));
+        refreshToken.setExpirationDate(LocalDateTime.now().plusDays(refreshTokenExpiryDays));
         return refreshTokenRepository.save(refreshToken);
     }
 

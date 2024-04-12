@@ -45,6 +45,7 @@ public class AuthManager implements AuthService {
     public RefreshedTokenResponse refreshToken(String refreshToken, String ipAddress) {
         RefreshToken token = refreshTokenService.verify(refreshToken);
         RefreshToken newToken = refreshTokenService.rotate(token, ipAddress);
+        refreshTokenService.revokeOldTokens(token.getUser(), ipAddress);
         String accessToken = generateJwt(token.getUser());
         return new RefreshedTokenResponse(accessToken, newToken.getToken());
     }
